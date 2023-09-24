@@ -13,6 +13,7 @@ export class Game {
     onConnect(raceId?: string) {
         if (this.onConnectHasRun) return;
 
+        this.listenForMemberLeft();
         this.listenForCountdown();
         this.listenForMemberJoined();
         this.listenForRaceStarted();
@@ -136,6 +137,21 @@ export class Game {
         });
     }
 
+    private listenForMemberLeft() {
+        this.socket.subscribe("member_left", (_, { member, owner }) => {
+          useGameStore.setState((game) => {
+            const members = { ...game.members };
+            delete members[member];
+            return {
+              ...game,
+              owner,
+              members,
+            };
+          });
+        });
+      }
+    
+
     private updateMemberInState(member: RacePlayer) {
         console.log("Progress updated: " + JSON.stringify(member));
         useGameStore.setState((game) => {
@@ -176,6 +192,15 @@ export class Game {
     }
 
     next() {
-
+        const connectedToValidRace =
+            useConnectionStore.getState().raceExistsInServer;
+        if (connectedToValidRace) {
+            const language = useSettingsStore.getState().languageSelected?.language;
+            const dto = { language };
+            this.socket.emit("refresh_challenge", dto);
+        } else {
+            this.play();
+        }
     }
+
 }

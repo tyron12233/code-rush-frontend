@@ -52,13 +52,13 @@ export const useConnectionManager = () => {
       useConnectionStore.setState((state) => ({ ...state, isConnected: true }));
       if (raceId && !isConnected) {
         // fetchRaceStatus(raceId).then(({ ok }) => {
-          
+
         //   const currentRaceID = useGameStore.getState().id;
         //   const raceExistsInServer = raceId !== currentRaceID || ok;
-        //   useConnectionStore.setState((state) => ({
-        //     ...state,
-        //     raceExistsInServer,
-        //   }));
+        useConnectionStore.setState((state) => ({
+          ...state,
+          raceExistsInServer: true,
+        }));
         // });
         updateUserInStore();
       }
