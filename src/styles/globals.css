@@ -29,3 +29,122 @@ a {
   background: #dbdbdb;
   border-radius: 100px;
 }
+
+
+
+
+
+
+
+
+.grass, .sky, .road {
+  position: relative;
+}
+
+.sky {
+  height: 40%;
+  background: skyblue;
+}
+
+.grass {
+  height: 30%;
+  background: seagreen;
+}
+
+.road {
+  height: 30%;
+  background: dimgrey;
+  box-sizing: border-box;
+  border-top: 10px solid grey;
+  border-bottom: 10px solid grey;
+  width: 100%;
+}
+
+.lines {
+  box-sizing: border-box;
+  border: 5px dashed #fff;
+  height: 0px;
+  width: 100%;
+  position: absolute;
+  top: 45%;
+}
+
+/* ELEMENTS TO ANIMATE */
+
+.mario {
+  position: absolute;
+  top: -40px;
+  left: 0px;
+  animation: drive 30s both infinite normal, jump 0.3s 1.2s ease;
+  /*
+  animation-name: drive;
+  animation-duration: 3s;
+  animation-fill-mode: both;  none forwards backwards both
+  animation-iteration-count: infinite;
+  animation-timing-function: normal;
+   animation-timing-function: cubic-bezier(0, .77, 1, .28); */
+}
+
+.luigi {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  animation: drive 5s both infinite normal;
+  /*
+  animation-name: drive;
+  animation-duration: 5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-direction: normal;  alternate alternate-reverse reverse normal
+  animation-timing-function: normal;
+  animation-timing-function: cubic-bezier(0, .77, 1, .28); */
+}
+
+.cloud {
+  position: absolute;
+}
+
+.cloud:nth-child(1) {
+  width: 200px;
+  top: 120px;
+  opacity: 0.5;
+  animation: wind 80s /* delay somewhere after duration */ linear infinite reverse;
+}
+
+.cloud:nth-child(2) {
+  width: 300px;
+  top: 0;
+  animation: wind 50s linear infinite reverse;
+}
+
+/* KEYFRAMES */
+
+@keyframes drive {
+  from {
+      transform: translateX(-200px);
+  }
+  to {
+      transform: translateX(1550px);
+  }
+}
+
+@keyframes wind {
+  from {
+      left: -300px;
+  }
+  to {
+      left: 100%;
+  }
+}
+
+@keyframes jump {
+  0% {
+      top: -40px;
+  }
+  50% {
+      top: -100px;
+  }
+  100% {
+      top: -40px;
+  }
+}

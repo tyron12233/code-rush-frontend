@@ -9,6 +9,71 @@ import {
   useIsMultiplayer,
 } from "../../../state/game-store";
 
+import { createUseStyles } from "react-jss";
+
+type RuleNames = 'marioImage' | 'road' | 'lines'
+
+type ProgressBarProps2 = {
+  value: number
+  showLabel?: boolean
+  style?: React.CSSProperties
+}
+
+
+
+const useStyles = createUseStyles<RuleNames, Omit<ProgressBarProps2, 'style'>>({
+  marioImage: ({ theme, value }) => ({
+    position: 'relative',
+    transition: 'translate 0.2s ease',
+    // translate: `(${value}) % `,
+    width: 35,
+    height: 35,
+    top: -12,
+    bottom: 0,
+    // left: (value + "%"),
+    right: 0,
+    marginLeft: 12,
+    marginTop: 12,
+    marginRight: 12,
+    zIndex: 2,
+  }),
+  road: ({ theme }) => ({
+    position: 'relative',
+    width: '100%',
+    height: '50px',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    background: 'dimgray',
+    borderTop: '5px solid grey',
+    borderBottom: '5px solid grey',
+    boxSizing: 'border-box',
+    marginTop: 12,
+    marginBottom: 12,
+    zIndex: 0,
+    display: 'flex',
+    alignItems: 'center',
+  }),
+  'lines': ({ theme }) => ({
+    boxSizing: 'border-box',
+    border: '2px dashed white',
+    height: '0px',
+    width: '100%',
+    position: 'relative',
+    top: '-200',
+    zIndex: 3
+
+  }),
+})
+
+
+
+
+
+
+
+
+
 export function ResultsContainer() {
   const isMultiplayer = useIsMultiplayer();
   const results = useGameStore((state) => state.results);
@@ -23,7 +88,7 @@ export function ResultsContainer() {
 }
 
 export function ProgressContainer() {
-  const isMultiplayer = useIsMultiplayer();
+  const isMultiplayer = true; // useIsMultiplayer();
   const members = useGameStore((state) => state.members);
   return isMultiplayer ? (
     <div className="my-2">
@@ -102,6 +167,79 @@ export function ProgressBar({ player }: ProgressBarProps) {
   const ownerId = useGameStore.getState().owner;
   const isOwner = ownerId === player.id;
   const isCompleted = player.progress === 100;
+  const classes = useStyles({ value: player.progress })
+  const word = player.username;
+  const progress = player.progress;
+  if (true) {
+
+    return !isCompleted ? (
+      <div className="flex row w-full items-center bg-dark-lake rounded-lg px-3 py-2 my-2" style={{
+        height: "3.6rem",
+      }}>
+        <div style={{
+          height: "3.3rem",
+          width: '100%',
+          left: 0,
+          background: 'dimgray',
+          borderTop: '5px solid grey',
+          borderBottom: '5px solid grey',
+          boxSizing: 'border-box',
+          zIndex: 0,
+          position: "absolute",
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+
+          <div style={{
+            boxSizing: 'border-box',
+            border: '2px dashed white',
+            height: '0px',
+            width: '100%',
+            // top: '-200',
+          }}>
+
+          </div>
+
+        </div>
+
+
+
+        <div
+          className="w-full bg-transparent rounded-lg flex items-center"
+          style={{
+            height: "4px",
+            zIndex: 3
+          }}
+        >
+          <div
+            className="bg-transparent h-full rounded-lg"
+            style={{ width: `${progress}%`, transition: "width 200ms ease-in-out", zIndex: 0}}
+          ></div>
+
+          <img src="https://github.com/abdullahbc989/css-animate-tut/blob/master/src/mario/finished/src/assets/imgs/mario.png?raw=true"
+            className={classes.marioImage} />
+
+
+          {word && (
+            <span className="font-semibold text-xs rounded-lg px-2 py-1 bg-gray-700">
+              {word}
+            </span>
+          )}
+
+
+        </div>
+
+
+
+
+        {/* <div className={classes.road}>
+          <div className={classes.lines}></div>
+        </div> */}
+
+      </div>
+    ) : null;
+  }
+
   return !isCompleted ? (
     <div className="flex row w-full items-center bg-dark-lake rounded-lg px-3 py-2 my-2">
       <span className="flex w-48 ml-1 mr-4 text-sm font-semibold truncate">
@@ -130,6 +268,8 @@ export function PlayHeader() {
         >
           <ResultsContainer />
           <ProgressContainer />
+
+          <div style={{height: '1rem'}}></div>
         </motion.div>
       </AnimatePresence>
     </div>
