@@ -4,6 +4,7 @@ import Modal from '@/common/components/Modal';
 import { Overlay } from '@/common/components/Overlay';
 import { useIsPlaying } from '@/common/hooks/useIsPlaying';
 import { useSocket } from '@/common/hooks/useSocket';
+import UsernameDialog from '@/components/UsernameDialog';
 import { Keys, useKeyMap } from '@/hooks/useKeyMap';
 import { CodeArea } from '@/modules/play2/components/CodeArea'
 import { PlayFooter } from '@/modules/play2/components/play-footer/PlayFooter';
@@ -15,14 +16,15 @@ import { useEndGame } from '@/modules/play2/hooks/useEndGame';
 import { useGame } from '@/modules/play2/hooks/useGame';
 import { useIsCompleted } from '@/modules/play2/hooks/useIsCompleted';
 import { useResetStateOnUnmount } from '@/modules/play2/hooks/useResetStateOnUnmount';
-import { useConnectionManager } from '@/modules/play2/state/connection-store';
+import { useConnectionManager, useConnectionStore } from '@/modules/play2/state/connection-store';
 import { closeModals, openEditNameModal, useHasOpenModal, useSettingsStore } from '@/modules/play2/state/settings-store';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Dialog } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { stat } from 'fs';
 import Image from 'next/image'
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 function Play2Page() {
@@ -36,14 +38,42 @@ function Play2Page() {
   const { capsLockActive } = useKeyMap(
     true,
     Keys.Tab,
-    useCallback(() => game?.next(), [ game])
+    useCallback(() => game?.next(), [game])
   );
   useResetStateOnUnmount();
   useEndGame();
 
+  const editNameModalOpen = useSettingsStore((s) => s.editNameModalIsOpen);
+
+  const [username, setUsername] = useState<string>('');
+
+  const closeDialog = () => {
+    useSettingsStore.setState((s) => ({
+      ...s,
+      editNameModalIsOpen: false,
+    }));
+  };
+
+  const handleUsernameSubmit = (newUsername: string) => {
+    game?.changeUsername(newUsername);
+    closeDialog();
+  };
+
+
   return (
     <div className="flex flex-col relative">
       <>
+
+        
+        <div>
+          <UsernameDialog
+          isOpen={editNameModalOpen}
+          onRequestClose={closeDialog}
+          onSubmit={handleUsernameSubmit}
+        />
+
+        </div>
+
         <PlayHeader spectator={false} />
         {capsLockActive && (
           <div className="absolute top-[-30px] z-10 flex w-full items-center justify-center gap-2 font-medium text-red-400">
@@ -80,6 +110,8 @@ function Play2Page() {
             )}
           </motion.div>
         </AnimatePresence>
+
+
         <PlayFooter challenge={challenge} />
       </>
       <ToastContainer />

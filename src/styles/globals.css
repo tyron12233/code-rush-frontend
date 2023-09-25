@@ -168,3 +168,19 @@ a {
   width: 100%;
   position: 'relative'
 }
+
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #3f524c;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  max-width: 900px;
+  max-height: 95vh;
+  padding: 10px;
+}

@@ -220,4 +220,9 @@ export class Game {
         }
     }
 
+    changeUsername(username: string) {
+        console.log("Changed username");
+        this.socket.emit('change_username', username);
+    }
+
 }
