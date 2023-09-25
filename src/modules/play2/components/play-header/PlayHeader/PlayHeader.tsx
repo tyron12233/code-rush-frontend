@@ -213,18 +213,38 @@ export function ProgressBar({ player }: ProgressBarProps) {
         >
           <div
             className="bg-transparent h-full rounded-lg"
-            style={{ width: `${progress}%`, transition: "width 200ms ease-in-out", zIndex: 0}}
+            style={{ width: `${progress}%`, transition: "width 200ms ease-in-out", zIndex: 0 }}
           ></div>
 
           <img src="https://github.com/abdullahbc989/css-animate-tut/blob/master/src/mario/finished/src/assets/imgs/mario.png?raw=true"
             className={classes.marioImage} />
 
 
+
+
+
           {word && (
-            <span className="font-semibold text-xs rounded-lg px-2 py-1 bg-gray-700">
-              {word}
-            </span>
+            <div className="rounded-lg px-2 py-1 bg-gray-700" style={{
+              display: 'flex',
+              flexDirection: 'row',
+            }
+            }>
+              {isOwner && (
+                <div style={{marginRight: '.5rem'}}>
+                  <CrownIcon></CrownIcon>
+                </div>
+              )}
+
+
+
+              <span className="font-semibold text-xs">
+                {word}
+              </span>
+            </div>
           )}
+
+
+
 
 
         </div>
@@ -269,7 +289,7 @@ export function PlayHeader() {
           <ResultsContainer />
           <ProgressContainer />
 
-          <div style={{height: '1rem'}}></div>
+          <div style={{ height: '1rem' }}></div>
         </motion.div>
       </AnimatePresence>
     </div>
