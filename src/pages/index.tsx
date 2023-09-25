@@ -11,8 +11,10 @@ import { PlayHeader } from '@/modules/play2/components/play-header/PlayHeader';
 import { CodeTypingContainer } from '@/modules/play2/container/CodeTypingContainer';
 import { ResultsContainer } from '@/modules/play2/container/ResultsContainer';
 import { useChallenge } from '@/modules/play2/hooks/useChallenge';
+import { useEndGame } from '@/modules/play2/hooks/useEndGame';
 import { useGame } from '@/modules/play2/hooks/useGame';
 import { useIsCompleted } from '@/modules/play2/hooks/useIsCompleted';
+import { useResetStateOnUnmount } from '@/modules/play2/hooks/useResetStateOnUnmount';
 import { useConnectionManager } from '@/modules/play2/state/connection-store';
 import { closeModals, openEditNameModal, useHasOpenModal, useSettingsStore } from '@/modules/play2/state/settings-store';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
@@ -36,6 +38,8 @@ function Play2Page() {
     Keys.Tab,
     useCallback(() => game?.next(), [ game])
   );
+  useResetStateOnUnmount();
+  useEndGame();
 
   return (
     <div className="flex flex-col relative">
