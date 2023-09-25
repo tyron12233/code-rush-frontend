@@ -1,3 +1,4 @@
+import { useSettingsStore } from "@/modules/play2/state/settings-store";
 import { Footer } from "./Footer";
 import { navbarFactory } from "./NewNavbar";
 
@@ -25,17 +26,32 @@ export function Container({ children, centered }: ContainerProps) {
 
 export function Layout({ children }: LayoutProps) {
   const Navbar = navbarFactory();
+
+  const navBarVisible = useSettingsStore((state) => state.navBarVisible);
   return (
     <>
-      <Container centered={false}>
-        <Navbar />
-      </Container>
-      <Container centered={true}>{children}</Container>
-      <Container centered={false}>
-        <>
-          <Footer />
+      {navBarVisible && (
+        <Container centered={false}>
+          <Navbar />
+        </Container>
+      )}
+
+      {navBarVisible && (
+        <Container centered={true}>{children}</Container>
+      )}
+      {!navBarVisible && (
+        <> 
+        {children}
         </>
-      </Container>
+      )}
+
+      {navBarVisible && (
+        <Container centered={false}>
+          <>
+            <Footer />
+          </>
+        </Container>
+      )}
     </>
   );
 }

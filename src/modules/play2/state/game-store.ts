@@ -3,6 +3,8 @@ import { User, useUserStore } from "../../../common/state/user-store";
 import { Game } from "../services/game";
 import { useCodeStore } from "./code-store";
 import { useHasOpenModal } from "./settings-store";
+import { useGame } from "../hooks/useGame";
+import { useEffect, useState } from "react";
 
 export interface GameState {
   id?: string;
@@ -19,6 +21,7 @@ export interface RacePlayer {
   username: string;
   progress: number;
   recentlyTypedLiteral: string;
+  spectator: boolean;
 }
 
 export interface RaceResult {
@@ -50,6 +53,17 @@ export const useCanType = () => {
     (!hasOpenModal && hasStartTime)
   );
 };
+
+export const useIsSpectator = () => {
+  
+  const userId = useUserStore((state) => state.id);
+  const members = useGameStore((state) => state.members);
+
+  const result = Object.values(members).filter((member) => member.id === userId).some(member => member.spectator);
+  
+  console.log(Object.values(members));
+  return Object.values(members).length == 0 || result;
+}
 
 export const useIsMultiplayer = () => {
   const members = useGameStore((state) => state.members);

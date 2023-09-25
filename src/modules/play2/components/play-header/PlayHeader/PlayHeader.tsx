@@ -88,10 +88,12 @@ export function ResultsContainer() {
 }
 
 export function ProgressContainer() {
-  const isMultiplayer = true; // useIsMultiplayer();
+  const isMultiplayer = true;
   const members = useGameStore((state) => state.members);
   return isMultiplayer ? (
-    <div className="my-2">
+    <div className="my-2" style={{
+      width: '100%'
+    }}>
       {Object.values(members).map((player) => {
         return <ProgressBar key={player.id} player={player} />;
       })}
@@ -174,7 +176,7 @@ export function ProgressBar({ player }: ProgressBarProps) {
 
     return !isCompleted ? (
       <div className="flex row w-full items-center bg-dark-lake rounded-lg px-3 py-2 my-2" style={{
-        height: "3.6rem",
+        height: "3.6rem"
       }}>
         <div style={{
           height: "3.3rem",

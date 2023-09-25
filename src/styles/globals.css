@@ -25,6 +25,7 @@ a {
   width: 7px;
   background: #0e0e11;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #dbdbdb;
   border-radius: 100px;
@@ -37,7 +38,9 @@ a {
 
 
 
-.grass, .sky, .road {
+.grass,
+.sky,
+.road {
   position: relative;
 }
 
@@ -108,7 +111,9 @@ a {
   width: 200px;
   top: 120px;
   opacity: 0.5;
-  animation: wind 80s /* delay somewhere after duration */ linear infinite reverse;
+  animation: wind 80s
+    /* delay somewhere after duration */
+    linear infinite reverse;
 }
 
 .cloud:nth-child(2) {
@@ -121,30 +126,45 @@ a {
 
 @keyframes drive {
   from {
-      transform: translateX(-200px);
+    transform: translateX(-200px);
   }
+
   to {
-      transform: translateX(1550px);
+    transform: translateX(1550px);
   }
 }
 
 @keyframes wind {
   from {
-      left: -300px;
+    left: -300px;
   }
+
   to {
-      left: 100%;
+    left: 100%;
   }
 }
 
 @keyframes jump {
   0% {
-      top: -40px;
+    top: -40px;
   }
+
   50% {
-      top: -100px;
+    top: -100px;
   }
+
   100% {
-      top: -40px;
+    top: -40px;
   }
+}
+
+.main-background {
+  height: 100%;
+  background-image: url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/mario.gif?raw=true'), url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/ground.png?raw=true'), url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/bushes.png?raw=true'), url('https://raw.githubusercontent.com/Kageetai/mario-background-parallax/master/img/back.png?raw=true');
+  background-color: #f8e0b0;
+  background-repeat: no-repeat, repeat-x, repeat-x, repeat-x;
+  background-position: left 30% bottom 22px, left 0px bottom 0px, left 0px bottom 22px, left 0px bottom 0px;
+  animation: back 15s infinite linear;
+  width: 100%;
+  position: 'relative'
 }

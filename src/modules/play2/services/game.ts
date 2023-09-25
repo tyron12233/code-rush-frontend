@@ -8,6 +8,8 @@ import { useConnectionStore } from "../state/connection-store";
 
 export class Game {
 
+    isSpectate: boolean = false;
+
     onConnectHasRun: boolean = false;
 
     onConnect(raceId?: string) {
@@ -32,23 +34,27 @@ export class Game {
             });
         });
 
-        if (!raceId) {
+        if (!raceId && !this.isSpectate) {
             this.play();
-        } else if (this.id !== raceId) {
+        } else if (raceId && this.id !== raceId) {
             this.join(raceId);
         }
         this.onConnectHasRun = true;
     }
 
     join(id: string) {
-        this.socket.emit("join", id);
+        this.socket.emit("join", {
+            spectator: this.isSpectate,
+            id: id
+        });
     }
 
-    constructor(private socket: SocketLatest, raceId?: string) {
-        console.log("Game constructor: " + raceId);
+    constructor(private socket: SocketLatest, raceId?: string, spectator: boolean = false) {
+        this.isSpectate = spectator;
         this.initializeConnectedState(socket);
         this.onConnect(raceId);
     }
+
 
     private initializeConnectedState(socket: SocketLatest) {
         const connected = socket.socket.connected;

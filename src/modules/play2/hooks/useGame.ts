@@ -11,3 +11,13 @@ export const useGame = () => {
     [socket, raceIdQueryParam]
   );
 };
+
+export const useGameSpectator = () => {
+  const raceIdQueryParam = useInitialRaceIdQueryParam();
+  const socket = useConnectionStore((s) => s.socket);
+
+  return useMemo(
+    () => socket && new Game(socket, raceIdQueryParam, true),
+    [socket, raceIdQueryParam]
+  );
+};

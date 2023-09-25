@@ -8,6 +8,7 @@ export interface SettingsState {
   profileModalIsOpen: boolean;
   projectModalIsOpen: boolean;
   editNameModalIsOpen: boolean;
+  navBarVisible: boolean;
   publicRacesModalIsOpen: boolean;
   languageSelected: { language: string; name: string } | null;
   smoothCaret: boolean;
@@ -43,6 +44,7 @@ export const useSettingsStore = create<SettingsState>((_set, _get) => ({
   leaderboardModalIsOpen: false,
   profileModalIsOpen: false,
   editNameModalIsOpen: false,
+  navBarVisible: true,
   publicRacesModalIsOpen: false,
   projectModalIsOpen: false,
   smoothCaret: getInitialToggleStateFromLocalStorage(SMOOTH_CARET_KEY, false),
