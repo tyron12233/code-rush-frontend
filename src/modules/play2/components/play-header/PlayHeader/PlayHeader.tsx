@@ -20,6 +20,10 @@ type ProgressBarProps2 = {
 }
 
 
+interface SpectatorProps {
+  spectator: boolean
+}
+
 
 const useStyles = createUseStyles<RuleNames, Omit<ProgressBarProps2, 'style'>>({
   marioImage: ({ theme, value }) => ({
@@ -74,14 +78,14 @@ const useStyles = createUseStyles<RuleNames, Omit<ProgressBarProps2, 'style'>>({
 
 
 
-export function ResultsContainer() {
-  const isMultiplayer = useIsMultiplayer();
+export function ResultsContainer({ spectator = false }) {
+  const isMultiplayer = true; //useIsMultiplayer();
   const results = useGameStore((state) => state.results);
   return isMultiplayer ? (
     <div className="my-1">
       {Object.values(results).map((result, i) => {
         const place = i + 1;
-        return <Result key={i} result={result} place={place} />;
+        return <Result key={i} result={result} place={place} spectator={spectator} />;
       })}
     </div>
   ) : null;
@@ -104,9 +108,48 @@ export function ProgressContainer() {
 interface ResultProps {
   result: RaceResult;
   place: number;
+  spectator: boolean,
 }
 
-export function Result({ result, place }: ResultProps) {
+export function Result({ result, place, spectator = false }: ResultProps) {
+
+  if (spectator) {
+    return (
+      <div>
+        <div className="flex row w-full items-center rounded-md px-3 py-3 my-2" style={{
+          outline: '4px dashed #381B24',
+          background: '#ffc55e'
+        }}>
+          <span className="flex w-48 ml-1 mr-4 text-med font-bold truncate text-dark-ocean">
+            {result.user.username}
+          </span>
+          <div className="flex w-full gap-2">
+            <span className="flex font-semibold text-xs rounded-lg px-2 py-1 bg-orange-900 text-white">
+              {place} place
+            </span>
+            <div className="flex flex-grow justify-end gap-2">
+              <span className="font-semibold text-xs rounded-lg px-2 py-1 bg-gray-700">
+                {cpmToWpm(result.cpm)} wpm
+              </span>
+              <span className="font-semibold text-xs rounded-lg px-2 py-1 bg-gray-700">
+                {result.accuracy}% accuracy
+              </span>
+              <span className="font-semibold text-xs rounded-lg px-2 py-1 bg-gray-700">
+                {toHumanReadableTime(Math.floor(result.timeMS / 1000))}
+              </span>
+              <span className="font-semibold text-xs rounded-lg px-2 py-1 bg-gray-700">
+                {result.mistakes} mistakes
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {spectator && (
+          <div style={{height: '.1rem'}}/>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="flex row w-full items-center bg-dark-lake rounded-lg px-3 py-2 my-2">
       <span className="flex w-48 ml-1 mr-4 text-sm font-semibold truncate">
@@ -232,7 +275,7 @@ export function ProgressBar({ player }: ProgressBarProps) {
             }
             }>
               {isOwner && (
-                <div style={{marginRight: '.5rem'}}>
+                <div style={{ marginRight: '.5rem' }}>
                   <CrownIcon></CrownIcon>
                 </div>
               )}
@@ -277,7 +320,7 @@ export function ProgressBar({ player }: ProgressBarProps) {
   ) : null;
 }
 
-export function PlayHeader() {
+export function PlayHeader({ spectator = false }: SpectatorProps) {
   return (
     <div className="w-full relative">
       <AnimatePresence>
@@ -288,7 +331,7 @@ export function PlayHeader() {
           transition={{ duration: 0.5 }}
           className="w-full"
         >
-          <ResultsContainer />
+          <ResultsContainer spectator={spectator}></ResultsContainer>
           <ProgressContainer />
 
           <div style={{ height: '1rem' }}></div>

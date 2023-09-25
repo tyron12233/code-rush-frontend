@@ -27,7 +27,6 @@ function SpectatorPage() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    translate: 'translateY`()',
                 }}>
                     <div style={{
                         display: 'flex',
@@ -48,14 +47,12 @@ function SpectatorPage() {
                         flex: '2'
                     }}>
 
-                        <PlayHeader></PlayHeader>
+                        <PlayHeader spectator={true}></PlayHeader>
                     </div>
                 </div>
             )}
         </div>
     );
 }
-
-
 
 export default SpectatorPage;
