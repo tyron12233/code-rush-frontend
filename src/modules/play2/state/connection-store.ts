@@ -83,5 +83,5 @@ export const useConnectionManager = () => {
     socket?.subscribe("connect_error", onDisconnect);
     socket?.subscribe("disconnect", onDisconnect);
     socket?.subscribe("connect", onConnect);
-  }, [onConnect]);
+  }, [onConnect, socket]);
 };

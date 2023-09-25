@@ -44,7 +44,7 @@ function Play2Page() {
   return (
     <div className="flex flex-col relative">
       <>
-        <PlayHeader />
+        <PlayHeader spectator={false} />
         {capsLockActive && (
           <div className="absolute top-[-30px] z-10 flex w-full items-center justify-center gap-2 font-medium text-red-400">
             <div className="w-4 text-dark-ocean">
