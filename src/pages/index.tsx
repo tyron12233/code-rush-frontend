@@ -1,5 +1,7 @@
 "use client";
 
+import Modal from '@/common/components/Modal';
+import { Overlay } from '@/common/components/Overlay';
 import { useIsPlaying } from '@/common/hooks/useIsPlaying';
 import { useSocket } from '@/common/hooks/useSocket';
 import { Keys, useKeyMap } from '@/hooks/useKeyMap';
@@ -12,9 +14,11 @@ import { useChallenge } from '@/modules/play2/hooks/useChallenge';
 import { useGame } from '@/modules/play2/hooks/useGame';
 import { useIsCompleted } from '@/modules/play2/hooks/useIsCompleted';
 import { useConnectionManager } from '@/modules/play2/state/connection-store';
+import { closeModals, openEditNameModal, useHasOpenModal, useSettingsStore } from '@/modules/play2/state/settings-store';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
+import { stat } from 'fs';
 import Image from 'next/image'
 import { useCallback } from 'react';
 import { ToastContainer } from 'react-toastify';
@@ -25,12 +29,12 @@ function Play2Page() {
   const isPlaying = useIsPlaying();
   useSocket();
   useConnectionManager();
-    const game = useGame();
+  const game = useGame();
   const challenge = useChallenge();
   const { capsLockActive } = useKeyMap(
     true,
     Keys.Tab,
-    useCallback(() => game?.next(), [game])
+    useCallback(() => game?.next(), [ game])
   );
 
   return (
