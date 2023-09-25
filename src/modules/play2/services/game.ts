@@ -20,6 +20,7 @@ export class Game {
         this.listenForRaceJoined();
         this.listenForProgressUpdated();
         this.listenForRaceCompleted();
+        this.listenForRaceDoesNotExist();
 
         this.socket.subscribe("challenge_selected", (_) => {
             useGameStore.setState((game) => {
@@ -72,6 +73,16 @@ export class Game {
             useGameStore.setState((state) => ({
                 ...state,
                 countdown,
+            }));
+        });
+    }
+
+    private listenForRaceDoesNotExist() {
+        this.socket.subscribe("race_does_not_exist", (_, id) => {
+            console.log("race_does_not_exist", id);
+            useConnectionStore.setState((state) => ({
+                ...state,
+                raceExistsInServer: false,
             }));
         });
     }
@@ -139,18 +150,18 @@ export class Game {
 
     private listenForMemberLeft() {
         this.socket.subscribe("member_left", (_, { member, owner }) => {
-          useGameStore.setState((game) => {
-            const members = { ...game.members };
-            delete members[member];
-            return {
-              ...game,
-              owner,
-              members,
-            };
-          });
+            useGameStore.setState((game) => {
+                const members = { ...game.members };
+                delete members[member];
+                return {
+                    ...game,
+                    owner,
+                    members,
+                };
+            });
         });
-      }
-    
+    }
+
 
     private updateMemberInState(member: RacePlayer) {
         console.log("Progress updated: " + JSON.stringify(member));
