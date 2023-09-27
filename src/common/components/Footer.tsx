@@ -15,7 +15,9 @@ export function Footer() {
       }}
     >
       {!isPlaying && (
-        <div className="w-full bg-dark-ocean">
+        <div className="w-full" style={{
+          background: '#ffc55e'
+        }}>
           <AnimatePresence>
             <motion.div
               className="flex items-center justify-center text-faded-gray"

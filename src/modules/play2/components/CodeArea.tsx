@@ -22,6 +22,7 @@ export function CodeArea({
         staticHeigh ? "h-[250px] sm:h-[420px]" : ""
       } bg-dark-lake text-faded-gray flex-shrink tracking-tight sm:tracking-wider rounded-xl p-4 text-xs sm:text-2xl w-full`}
       style={{
+        background: "#fff5e6",
         fontFamily: "Fira Code",
         fontWeight: "normal",
       }}
@@ -54,8 +55,8 @@ function CodeAreaHeader({ filePath }: { filePath: string }) {
         <div className="w-2.5 h-2.5 bg-slate-600 rounded-full" />
       </div>
       <div className="flex items-start justify-center flex-row w-full h-6 pr-12">
-        <span className="hidden sm:block italic text-base opacity-80 truncate">
-          {filePath}
+        <span className="hidden sm:block italic opacity-80 truncate" style={{color: '#121212'}}>
+          {filePath} 
         </span>
       </div>
     </div>

@@ -134,7 +134,7 @@ export function PlayFooter({ challenge }: PlayFooterProps) {
 
                       <button
                         onClick={openEditNameModal}
-                        className="flex text-xs items-center font-semibold tracking-wide hover:cursor-pointer gap-2 hover:text-off-white"
+                        className="flex text-xs items-center text-dark-ocean font-semibold tracking-wide hover:cursor-pointer gap-2 hover:text-off-white"
                       >
 
                         Edit name
@@ -261,7 +261,9 @@ function ActionButtons() {
 
 function Timer({ seconds }: { seconds: number }) {
   return (
-    <div className="text-3xl ml-2 font-bold text-purple-300">
+    <div className="text-3xl ml-2 font-bold text-yellow-900" style={{
+      marginTop: '1rem'
+    }}>
       {toHumanReadableTime(seconds)}
     </div>
   );

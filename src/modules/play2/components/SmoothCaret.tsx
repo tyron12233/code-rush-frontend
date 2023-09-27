@@ -11,7 +11,7 @@ const SMOOTH_CARET_ELEMENT_ID = "smooth-caret-element";
 
 export const PRIMARY_PINK_COLOR = "#d6bcfa";
 
-export const OFF_WHITE_COLOR = "#374151";
+export const OFF_WHITE_COLOR = "powderblue";
 
 export const useBlinkingCursorAnimation = (
   color: string,

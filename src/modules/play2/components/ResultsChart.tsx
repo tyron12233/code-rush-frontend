@@ -41,8 +41,8 @@ const renderChart = (
         {
           label: "WPM each second",
           data,
-          backgroundColor: "#7e22ce",
-          borderColor: "#7e22ce",
+          backgroundColor: "#yellow-800",
+          borderColor: "yellow-900",
           tension: 0.4,
           fill: true,
         },
@@ -84,11 +84,14 @@ export default function ResultsChart() {
   }, [chartWPMData]);
 
   return (
-    <div className="flex rounded-xl flex-col bg-dark-lake grow m-2 max-w-screen">
+    <div className="flex rounded-xl flex-col bg-dark-lake grow m-2 max-w-screen" style={{
+      outline: '3px dashed #381B24',
+        background: '#ffc55e'
+    }}>
       <div className="flex flex-row">
-        <h1 className="text-sm p-4 font-semibold">Words Per Minute</h1>
+        <h1 className="text-sm text-dark-ocean p-4 font-semibold">Words Per Minute</h1>
       </div>
-      <div className="bg-dark-lake p-2 rounded-xl max-w-full h-full">
+      <div className="p-2 rounded-xl max-w-full h-full">
         <canvas ref={chartRef} />
       </div>
     </div>

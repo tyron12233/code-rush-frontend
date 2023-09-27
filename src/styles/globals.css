@@ -4,12 +4,22 @@
 
 html,
 body {
-  padding: 0;
+  /* padding: 0;
   margin: 0;
   color: #eeeeee;
-  background: #0e0e11;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, */
+  background: #0e0e11; */
   /*   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, */
+
+  color: #eeeeee;
+  height: 100%;
+  background-image: url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/mario.gif?raw=true'), url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/ground.png?raw=true'), url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/bushes.png?raw=true'), url('https://raw.githubusercontent.com/Kageetai/mario-background-parallax/master/img/back.png?raw=true');
+  background-color: #f8e0b0;
+  background-repeat: no-repeat, repeat-x, repeat-x, repeat-x;
+  background-position: left 10% bottom 22px, left 0px bottom 0px, left 0px bottom 22px, left 0px bottom 0px;
+  animation: back 15s infinite linear;
+  width: 100%;
+  position: 'relative'
 }
 
 a {
@@ -159,7 +169,6 @@ a {
 }
 
 .main-background {
-  height: 100%;
   background-image: url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/mario.gif?raw=true'), url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/ground.png?raw=true'), url('https://github.com/Kageetai/mario-background-parallax/blob/master/img/bushes.png?raw=true'), url('https://raw.githubusercontent.com/Kageetai/mario-background-parallax/master/img/back.png?raw=true');
   background-color: #f8e0b0;
   background-repeat: no-repeat, repeat-x, repeat-x, repeat-x;

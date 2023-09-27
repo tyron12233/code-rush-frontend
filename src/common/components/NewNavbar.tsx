@@ -60,7 +60,7 @@ export const NewNavbar = () => {
     >
       <div className="w-full">
         <div className="flex items-center items-start py-2">
-          <HomeLink />
+          {/* <HomeLink /> */}
           {!isPlaying && (
             <div className="flex gap-2">
               <Link href="/">

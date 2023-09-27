@@ -29,12 +29,16 @@ export function ResultsText({
   return (
     <div
       title={info}
-      className="h-full flex flex-col justify-end px-2 w-full sm:min-w-[150px] bg-dark-lake rounded p-2 py-4"
+      className="h-full flex flex-col justify-end px-2 w-full sm:min-w-[150px] rounded p-2 py-4"
+      style={{
+        outline: '3px dashed #381B24',
+        background: '#ffc55e'
+      }}
     >
-      <p className="flex justify-start color-inherit font-bold text-off-white text-xs">
+      <p className="flex justify-start color-inherit font-bold text-dark-ocean text-xs">
         {title}
       </p>
-      <div className="flex items-center gap-2 text-faded-gray justify-between">
+      <div className="flex items-center gap-2 text-dark-ocean justify-between">
         <p className="font-bold text-2xl">{value}</p>
       </div>
     </div>
@@ -106,7 +110,7 @@ export function ResultsContainer() {
     <div className="w-full flex flex-col">
       <div className="w-full flex flex-row gap-4 justify-between mb-2">
         <div className="flex flex-col gap-1 mx-2 w-full">
-          <h3 className="px-2 flex color-inherit font-bold text-faded-gray text-sm items-center gap-2">
+          <h3 className="px-2 flex color-inherit font-bold text-dark-ocean text-sm items-center gap-2">
             <FontAwesomeIcon
               className="h-5 w-5 flex items-center justify-center"
               icon={faSquarePollVertical}

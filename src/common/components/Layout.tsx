@@ -45,13 +45,13 @@ export function Layout({ children }: LayoutProps) {
         </>
       )}
 
-      {navBarVisible && (
+      {/* {navBarVisible && (
         <Container centered={false}>
           <>
             <Footer />
           </>
         </Container>
-      )}
+      )} */}
     </>
   );
 }

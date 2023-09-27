@@ -26,6 +26,7 @@ import { stat } from 'fs';
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import jpcsLogo from "../assets/icons/jpcs_logo.png";
 
 function Play2Page() {
 
@@ -64,17 +65,27 @@ function Play2Page() {
     <div className="flex flex-col relative">
       <>
 
-        
+
         <div>
           <UsernameDialog
-          isOpen={editNameModalOpen}
-          onRequestClose={closeDialog}
-          onSubmit={handleUsernameSubmit}
-        />
+            isOpen={editNameModalOpen}
+            onRequestClose={closeDialog}
+            onSubmit={handleUsernameSubmit}
+          />
 
         </div>
 
-        <PlayHeader spectator={false} />
+        <img src={jpcsLogo.src} style={{
+          maxWidth: '60%',
+          alignSelf: 'center',
+        }} />
+
+        <span className="text-yellow-900 bold" style={{
+          alignSelf: 'center',
+          fontStyle: 'bold',
+        }}>made with &lt;3 by @tyronscott_  ^__^</span>
+
+        <PlayHeader spectator={true} />
         {capsLockActive && (
           <div className="absolute top-[-30px] z-10 flex w-full items-center justify-center gap-2 font-medium text-red-400">
             <div className="w-4 text-dark-ocean">
