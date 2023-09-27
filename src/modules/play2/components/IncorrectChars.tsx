@@ -7,6 +7,7 @@ function isOnlySpace(str: string) {
 export function IncorrectChars() {
   const incorrectChars = useCodeStore((state) => state.incorrectChars);
   const charGroups = parseIncorrectCharGroups(incorrectChars());
+
   return (
     <>
       {charGroups.map((chars, index) => {

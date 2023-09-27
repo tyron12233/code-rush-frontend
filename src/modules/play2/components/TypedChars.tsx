@@ -1,5 +1,5 @@
 import highlightjs from "highlight.js";
-import "highlight.js/styles/github-dark.css";
+import "highlight.js/styles/stackoverflow-dark.css";
 import { useEffect, useRef } from "react";
 import { useCodeStore } from "../state/code-store";
 import { useSettingsStore } from "../state/settings-store";
