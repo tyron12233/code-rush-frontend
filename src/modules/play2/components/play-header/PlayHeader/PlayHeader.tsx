@@ -11,6 +11,9 @@ import {
 
 import { createUseStyles } from "react-jss";
 
+import mario from "../../../../../assets/icons/mario.png";
+import luigi from "../../../../../assets/icons/luigi.png";
+
 type RuleNames = 'marioImage' | 'road' | 'lines'
 
 type ProgressBarProps2 = {
@@ -98,8 +101,8 @@ export function ProgressContainer() {
     <div className="my-2" style={{
       width: '100%'
     }}>
-      {Object.values(members).map((player) => {
-        return <ProgressBar key={player.id} player={player} />;
+      {Object.values(members).map((player, index) => {
+        return <ProgressBar key={player.id} player={player} playerIndex={index + 1} />;
       })}
     </div>
   ) : null;
@@ -180,6 +183,7 @@ export function Result({ result, place, spectator = false }: ResultProps) {
 
 interface ProgressBarProps {
   player: RacePlayer;
+  playerIndex: number,
 }
 
 interface ProgressProps {
@@ -208,13 +212,14 @@ export function Progress({ progress, word }: ProgressProps) {
   );
 }
 
-export function ProgressBar({ player }: ProgressBarProps) {
+export function ProgressBar({ player, playerIndex}: ProgressBarProps) {
   const ownerId = useGameStore.getState().owner;
   const isOwner = ownerId === player.id;
   const isCompleted = player.progress === 100;
   const classes = useStyles({ value: player.progress })
   const word = player.username;
   const progress = player.progress;
+
   if (true) {
 
     return !isCompleted ? (
@@ -261,7 +266,7 @@ export function ProgressBar({ player }: ProgressBarProps) {
             style={{ width: `${progress}%`, transition: "width 200ms ease-in-out", zIndex: 0 }}
           ></div>
 
-          <img src="https://github.com/abdullahbc989/css-animate-tut/blob/master/src/mario/finished/src/assets/imgs/mario.png?raw=true"
+          <img src={(playerIndex & 1) ? mario.src : luigi.src}
             className={classes.marioImage} />
 
 

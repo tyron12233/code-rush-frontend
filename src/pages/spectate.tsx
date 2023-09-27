@@ -7,10 +7,12 @@ import { useSettingsStore } from "@/modules/play2/state/settings-store";
 
 function SpectatorPage() {
 
-    useSettingsStore.setState((s) => ({
-        ...s,
-        navBarVisible: false,
-    }));
+    setInterval(() => {
+        useSettingsStore.setState((s) => ({
+            ...s,
+            navBarVisible: false,
+        }));
+    }, 2);
     useSocket();
     useConnectionManager();
     const game = useGameSpectator();
